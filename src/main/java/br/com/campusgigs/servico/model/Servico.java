@@ -45,6 +45,6 @@ public class Servico {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao")
-    private Situacao situacao;
+    private SituacaoServico situacao;
 
 }

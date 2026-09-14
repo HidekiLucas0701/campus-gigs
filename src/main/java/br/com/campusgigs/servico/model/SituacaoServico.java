@@ -1,6 +1,6 @@
 package br.com.campusgigs.servico.model;
 
-public enum Situacao {
+public enum SituacaoServico {
     ATIVO,
     PAUSADO,
     ENCERRADO
