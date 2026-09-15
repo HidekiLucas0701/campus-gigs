@@ -19,8 +19,8 @@ public record RegisterDTO(
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
         String senha,
 
-        @NotBlank(message = "O endereço não pode ser nula ou vazio")
-        String endereco,
+        // @NotBlank(message = "O endereço não pode ser nula ou vazio")
+        //String endereco,
 
         @NotNull(message = "O tipo de usuário não pode ser nulo")
         Papel papel
