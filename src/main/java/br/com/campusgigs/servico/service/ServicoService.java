@@ -3,8 +3,11 @@ package br.com.campusgigs.servico.service;
 import br.com.campusgigs.servico.model.Servico;
 import br.com.campusgigs.servico.model.SituacaoServico;
 import br.com.campusgigs.servico.repository.ServicoRepository;
+import br.com.campusgigs.usuario.model.Papel;
 import br.com.campusgigs.usuario.model.Usuario;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,9 +31,16 @@ public class ServicoService {
         return servicoRepository.findAll();
     }
 
-    public Servico encerrar(Long id) {
+    public Servico encerrar(Long id, Usuario usuarioLogado) {
         Servico servico = servicoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço não encontrado"));
+
+        boolean isDono = servico.getPrestador().getId().equals(usuarioLogado.getId());
+        boolean isAdmin = usuarioLogado.getPapel() == Papel.ADMIN;
+
+        if (!isDono && !isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você só pode encerrar os seus próprios serviços");
+        }
 
         servico.setSituacao(SituacaoServico.ENCERRADO);
 
