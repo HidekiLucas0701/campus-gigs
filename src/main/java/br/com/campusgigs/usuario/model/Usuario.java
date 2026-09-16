@@ -37,9 +37,14 @@ public class Usuario implements UserDetails {
     @Column(name = "senha")
     private String senha;
 
-    //TODO: Adicionar API ViaCEP
-    //@Column(name = "endereco")
-    //private String endereco;
+    @Column(name = "cep")
+    private String cep;
+
+    @Column(name = "cidade")
+    private String cidade;
+
+    @Column(name = "uf")
+    private String uf;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "papel")

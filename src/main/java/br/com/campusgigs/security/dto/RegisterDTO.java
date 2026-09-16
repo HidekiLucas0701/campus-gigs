@@ -19,8 +19,9 @@ public record RegisterDTO(
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
         String senha,
 
-        // @NotBlank(message = "O endereço não pode ser nula ou vazio")
-        //String endereco,
+        @NotBlank(message = "O CEP é obrigatório")
+        @Pattern(regexp = "\\d{8}", message = "O CEP deve conter exatamente 8 dígitos")
+        String cep,
 
         @NotNull(message = "O tipo de usuário não pode ser nulo")
         Papel papel
